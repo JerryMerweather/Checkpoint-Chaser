@@ -1,0 +1,347 @@
+{
+  "associatedLayout": "Level Editor",
+  "name": "SaveCodeLE",
+  "events": [
+    {
+      "type": "BuiltinCommonInstructions::Comment",
+      "color": {
+        "b": 109,
+        "g": 230,
+        "r": 255,
+        "textB": 0,
+        "textG": 0,
+        "textR": 0
+      },
+      "comment": "These events are responsible for creating the save code.\n\nIf you've introduced a new variable in trackconf or any other block and want it to be saved, you need to add a new event within the \"Save block's object variables\" group.\n\nThe event condition should verify the block name for which you want to save the variables. The action of the event should append a new string to the scene variable SaveCode. The string should follow this format:\n\nBlocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+<BLOCK NAME>.<OBJECT VARIABLE NAME>+\"/\"\n\n\nTo add more object variables simply add the below line before the (\"/\"): \n\n\":\"+<BLOCK NAME>.<OBJECT VARIABLE NAME>+\n\n\nLike this:\nBlocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+<BLOCK NAME>.<OBJECT VARIABLE NAME>+\":\"+<BLOCK NAME>.<OBJECT VARIABLE NAME 2>+\"/\"\n\n\nRemember to update the LoadSave function to account for your variables and ensure they are loaded\n!"
+    },
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [],
+      "actions": [
+        {
+          "type": {
+            "value": "ModVarSceneTxt"
+          },
+          "parameters": [
+            "SaveCode",
+            "=",
+            "\"\""
+          ]
+        }
+      ],
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::ForEach",
+          "object": "Blocks",
+          "conditions": [
+            {
+              "type": {
+                "value": "Layer"
+              },
+              "parameters": [
+                "Blocks",
+                ""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"Node\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"TrackConf\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"CheckpointTrigger\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"ColorBlock\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"Powerup\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"MovementMod\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::CompareStrings"
+                  },
+                  "parameters": [
+                    "Blocks.ObjectName()",
+                    "!=",
+                    "\"Turret\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ModVarSceneTxt"
+                  },
+                  "parameters": [
+                    "SaveCode",
+                    "+",
+                    "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\"/\""
+                  ]
+                }
+              ]
+            },
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "name": "Save block's object variables",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"Node\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+Node.ID+\":\"+Node.FINISH+\":\"+Node.JUMP+\"/\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"CheckpointTrigger\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+CheckpointTrigger.ID+\":\"+CheckpointTrigger.FINISH+\"/\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"ColorBlock\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+ColorBlock.ID+\"/\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"MovementMod\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle()) +\":\"+ MovementMod.Slippery +\":\"+ MovementMod.CanJump +\":\"+ MovementMod.Deceleration +\"/\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"Powerup\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+Powerup.ID+\"/\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"TrackConf\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName() + \":\" + ToString(Blocks.X()) + \",\" + ToString(Blocks.Y()) + \",\" + ToString(Blocks.Angle()) + \":\" + TrackConf.Laps + \":\" + TrackConf.MaxSpeed + \":\" + TrackConf.Acceleration + \":\" + TrackConf.Deacceleration + \":\" + TrackConf.AirCooldown + \":\" + TrackConf.BackgroundColor+ \":\" + TrackConf.Drift+ \":\" + TrackConf.Dim+ \":\" +ToString(TrackConf.RespawnOnBgTouch)+ \"/\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "Blocks.ObjectName()",
+                        "=",
+                        "\"Turret\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarSceneTxt"
+                      },
+                      "parameters": [
+                        "SaveCode",
+                        "+",
+                        "Blocks.ObjectName()+\":\"+ToString(Blocks.X())+\",\"+ToString(Blocks.Y())+\",\"+ToString(Blocks.Angle())+\":\"+Turret.Range+\":\"+Turret.Speed+\"/\""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [],
+      "actions": []
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "associatedLayout": "Level Editor",
+  "name": "LightLE",
+  "events": [
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [],
+      "actions": [
+        {
+          "type": {
+            "value": "AjoutObjConcern"
+          },
+          "parameters": [
+            "CheckpointPillarLight",
+            "FakeLight"
+          ]
+        },
+        {
+          "type": {
+            "value": "Delete"
+          },
+          "parameters": [
+            "FakeLight",
+            "CheckpointPillarLight"
+          ]
+        },
+        {
+          "type": {
+            "value": "AjoutObjConcern"
+          },
+          "parameters": [
+            "CheckpointPillarLight",
+            "LightEmitter"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::ForEach",
+          "object": "LightEmitter",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "Create"
+              },
+              "parameters": [
+                "",
+                "FakeLight",
+                "LightEmitter.X()",
+                "LightEmitter.Y()",
+                "\"Lighting\""
+              ]
+            },
+            {
+              "type": {
+                "value": "SetCenter"
+              },
+              "parameters": [
+                "FakeLight",
+                "=",
+                "LightEmitter.CenterX()",
+                "=",
+                "LightEmitter.CenterY()"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "CollisionNP"
+                  },
+                  "parameters": [
+                    "LightEmitter",
+                    "ColorBlock",
+                    "",
+                    "",
+                    "yes"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeColor"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "ColorBlock.ID"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [],
+      "actions": []
+    }
+  ]
+}

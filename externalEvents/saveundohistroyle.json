@@ -1,0 +1,45 @@
+{
+  "associatedLayout": "Level Editor",
+  "name": "SaveUndoHistroyLE",
+  "events": [
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [],
+      "actions": [],
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Link",
+          "include": {
+            "includeConfig": 0
+          },
+          "target": "SaveCodeLE"
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetStringVariable"
+              },
+              "parameters": [
+                "SaveCode",
+                "=",
+                "Base64::ToB64(Compressor::Compress(SaveCode))"
+              ]
+            },
+            {
+              "type": {
+                "value": "PushVariable"
+              },
+              "parameters": [
+                "UndoHistroy",
+                "SaveCode"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

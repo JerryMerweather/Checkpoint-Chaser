@@ -1,0 +1,79 @@
+{
+  "author": "",
+  "category": "Advanced",
+  "extensionNamespace": "",
+  "fullName": "Base 64",
+  "gdevelopVersion": "",
+  "helpPath": "https://www.youtube.com/watch?v=qVtbUKuYcY8",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPHBhdGggZD0iTTI5LjIsMi44QzI4LjEsMS42LDI2LjYsMSwyNSwxYy0wLjEsMC0wLjIsMC0wLjMsMGMwLjQsMCwwLjgsMC4zLDAuOSwwLjhjMC4zLDEuNi0wLjIsMy4zLTEuNCw0LjUNCgljLTAuOSwwLjktMi4yLDEuNS0zLjUsMS41Yy0wLjMsMC0wLjYsMC0wLjktMC4xQzE5LjMsNy42LDE4LjksNywxOSw2LjVjMC4xLTAuNSwwLjYtMC45LDEuMi0wLjhjMSwwLjIsMi0wLjEsMi43LTAuOA0KCWMwLjctMC43LDEtMS43LDAuOC0yLjdjLTAuMS0wLjUsMC4yLTEsMC44LTEuMmMtMS40LDAuMS0yLjcsMC43LTMuNywxLjdDMTkuNiwzLjksMTksNS40LDE5LDdzMC42LDMuMSwxLjgsNC4yUzIzLjQsMTMsMjUsMTMNCgljMC4xLDAsMC4xLDAsMC4yLDBjLTAuNCwwLTAuOC0wLjMtMC45LTAuOGMtMC4zLTEuNiwwLjItMy4zLDEuNC00LjVjMS4yLTEuMiwyLjgtMS43LDQuNS0xLjRDMzAuNyw2LjQsMzEuMSw3LDMxLDcuNQ0KCWMtMC4xLDAuNS0wLjYsMC45LTEuMiwwLjhjLTEtMC4yLTIsMC4xLTIuNywwLjhjLTAuNywwLjctMSwxLjctMC44LDIuN2MwLjEsMC41LTAuMiwxLTAuOCwxLjJjMS40LTAuMSwyLjctMC43LDMuNy0xLjcNCglDMzAuNCwxMC4xLDMxLDguNiwzMSw3UzMwLjQsMy45LDI5LjIsMi44eiIvPg0KPGc+DQoJPHBvbHlnb24gcG9pbnRzPSIxNi43LDEyLjcgMTIuNiwxNi45IDIxLjQsMjQuNiAyNC40LDIxLjYgCSIvPg0KCTxwYXRoIGQ9Ik0xNS40LDExLjJMOC41LDMuM0M3LDEuNiw0LjUsMS41LDIuOSwzLjFDMS4zLDQuNywxLjQsNy4yLDMuMSw4LjdsOCw2LjlMMTUuNCwxMS4yeiIvPg0KCTxwYXRoIGQ9Ik0yOS44LDI1LjljLTAuNS0wLjUtMS4yLTAuNS0xLjcsMGwtMi40LTIuOEwyMi45LDI2bDIuOCwyLjRjLTAuNSwwLjUtMC41LDEuMiwwLDEuN2MwLjUsMC41LDEuMiwwLjUsMS43LDBsMi41LTIuNQ0KCQlDMzAuMywyNy4xLDMwLjMsMjYuNCwyOS44LDI1Ljl6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==",
+  "name": "Base64",
+  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/Glyphster Pack/Master/SVG/Sports and Fitness/a68ee83e58b58cfaf1b29d5bb35a16d86454c9981e4afa94947b112062ff1b03_Sports and Fitness_baseball_bat_hardball.svg",
+  "shortDescription": "",
+  "version": "1.0.0",
+  "description": "",
+  "tags": [],
+  "authorIds": [
+    "ZgrsWuRTAkXgeuPV9bo0zuEcA2w1"
+  ],
+  "dependencies": [],
+  "globalVariables": [],
+  "sceneVariables": [],
+  "eventsFunctions": [
+    {
+      "description": "Converts a string to base 64",
+      "fullName": "To base 64",
+      "functionType": "StringExpression",
+      "name": "ToB64",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = btoa(eventsFunctionContext.getArgument(\"Input\"));",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Input string",
+          "name": "Input",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Converts a base 64 string back to its original form",
+      "fullName": "From base 64",
+      "functionType": "StringExpression",
+      "name": "FromB64",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = atob(eventsFunctionContext.getArgument(\"Input\"));",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Input string",
+          "name": "Input",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    }
+  ],
+  "eventsBasedBehaviors": [],
+  "eventsBasedObjects": []
+}

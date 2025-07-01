@@ -1,0 +1,248 @@
+{
+  "associatedLayout": "Game",
+  "name": "RecordReplay",
+  "events": [
+    {
+      "type": "BuiltinCommonInstructions::Comment",
+      "color": {
+        "b": 109,
+        "g": 230,
+        "r": 255,
+        "textB": 0,
+        "textG": 0,
+        "textR": 0
+      },
+      "comment": "This external event should be triggered to save the current timestamp to the replay.\nthe syntax is as follows:\n"
+    },
+    {
+      "colorB": 228,
+      "colorG": 176,
+      "colorR": 74,
+      "creationTime": 0,
+      "name": "Record Player",
+      "source": "",
+      "type": "BuiltinCommonInstructions::Group",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "TopDownMovementBehavior::TopDownMovementBehavior::IsUsingControl"
+                  },
+                  "parameters": [
+                    "Player",
+                    "TopDownMovement",
+                    "\"Up\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetBooleanVariable"
+                  },
+                  "parameters": [
+                    "SimUp",
+                    "True",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "TopDownMovementBehavior::TopDownMovementBehavior::IsUsingControl"
+                  },
+                  "parameters": [
+                    "Player",
+                    "TopDownMovement",
+                    "\"Down\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetBooleanVariable"
+                  },
+                  "parameters": [
+                    "SimDown",
+                    "True",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "TopDownMovementBehavior::TopDownMovementBehavior::IsUsingControl"
+                  },
+                  "parameters": [
+                    "Player",
+                    "TopDownMovement",
+                    "\"Right\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetBooleanVariable"
+                  },
+                  "parameters": [
+                    "SimRight",
+                    "True",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "TopDownMovementBehavior::TopDownMovementBehavior::IsUsingControl"
+                  },
+                  "parameters": [
+                    "Player",
+                    "TopDownMovement",
+                    "\"Left\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetBooleanVariable"
+                  },
+                  "parameters": [
+                    "SimLeft",
+                    "True",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetStringVariable"
+                  },
+                  "parameters": [
+                    "PlayerRecordCurrentTimeInfo[ToString(roundTo(TimerElapsedTime(\"SpeedrunTimer\"), 1))]",
+                    "=",
+                    "SimUp+\",\"+SimDown+\",\"+SimRight+\",\"+SimLeft+\",\"+ToString(round(Player.Speed))+\",\"+ToString(Player.X())+\",\"+ToString(Player.Y())+\",\"+ToString(Player.Angle())+\";\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "JSONToVariableStructure2"
+                  },
+                  "parameters": [
+                    "ToJSON(PlayerRecordCurrentTimeInfo)",
+                    "Replay[\"Player\"+Player.ID]"
+                  ]
+                }
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "PlayerRecordCurrentTimeInfo",
+              "type": "structure",
+              "children": []
+            },
+            {
+              "name": "SimUp",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "SimDown",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "SimRight",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "SimLeft",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "colorB": 228,
+      "colorG": 176,
+      "colorR": 74,
+      "creationTime": 0,
+      "name": "Record Bot",
+      "source": "",
+      "type": "BuiltinCommonInstructions::Group",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetStringVariable"
+                  },
+                  "parameters": [
+                    "AIRecordCurrentTimeInfo[ToString(roundTo(TimerElapsedTime(\"SpeedrunTimer\"), 1))]",
+                    "=",
+                    "SimUp+\",\"+SimDown+\",\"+SimRight+\",\"+SimLeft+\",\"+ToString(round(Player.Speed))+\",\"+ToString(Player.X())+\",\"+ToString(Player.Y())+\",\"+ToString(Player.Angle())+\";\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "JSONToVariableStructure2"
+                  },
+                  "parameters": [
+                    "ToJSON(AIRecordCurrentTimeInfo)",
+                    "Replay[\"Player\"+Player.ID]"
+                  ]
+                }
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "AIRecordCurrentTimeInfo",
+              "type": "structure",
+              "children": []
+            }
+          ]
+        }
+      ],
+      "parameters": []
+    }
+  ]
+}

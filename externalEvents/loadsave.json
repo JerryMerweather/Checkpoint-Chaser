@@ -1,0 +1,1117 @@
+{
+  "associatedLayout": "Game",
+  "name": "LoadSave",
+  "events": [
+    {
+      "type": "BuiltinCommonInstructions::Comment",
+      "color": {
+        "b": 109,
+        "g": 230,
+        "r": 255,
+        "textB": 0,
+        "textG": 0,
+        "textR": 0
+      },
+      "comment": "To load track data from a save code, specific events are triggered. If you've added a new variable in the trackconf or another block and want it to be loaded in the game scene, you must first save it, as described in the SaveCodeLE comments.\n\nOnce you've created an event to save object variable values to the save code, you can load them by following these steps:\n\n1- Add an event to the \"Load certain variables to blocks\" group.\n2- Set the event condition to verify the block name for which you want to load the variables.\n3- Set the event action to change the variable of the Block group, using the name of the variable you want to change.\n4- Retrieve the saved values using SaveLoadArrayPos, starting with the first value at position [2] and incrementing the number to access subsequent values. \n\nFor example, to retreive the second object variable saved, use SaveLoadArrayPos[3]"
+    },
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [],
+      "actions": [
+        {
+          "type": {
+            "value": "SetBooleanVariable"
+          },
+          "parameters": [
+            "FinishedLoadSave",
+            "False",
+            ""
+          ]
+        }
+      ],
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "RegEx::Split"
+              },
+              "parameters": [
+                "",
+                "\"/\"",
+                "",
+                "VariableString(SaveLoad)",
+                "\"SaveLoadArray\"",
+                ""
+              ]
+            }
+          ],
+          "events": [
+            {
+              "disabled": true,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"STARTED LOADING LEVEL\"",
+                    "\"info\"",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"SaveLoad: \"+SaveLoad",
+                    "\"info\"",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::ForEachChildVariable",
+              "iterableVariableName": "SaveLoadArray",
+              "valueIteratorVariableName": "Child",
+              "keyIteratorVariableName": "",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RegEx::Split"
+                  },
+                  "parameters": [
+                    "",
+                    "\":\"",
+                    "",
+                    "Child",
+                    "\"SaveLoadArrayPos\"",
+                    ""
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "colorB": 228,
+                  "colorG": 176,
+                  "colorR": 74,
+                  "creationTime": 0,
+                  "folded": true,
+                  "name": "Thumbnail loading",
+                  "source": "",
+                  "type": "BuiltinCommonInstructions::Group",
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "CurrentSceneName()",
+                            "=",
+                            "\"Menu\""
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "folded": true,
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"Crowd\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"AI\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"Slow\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"Node\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"Player\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"Collision\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"Powerup\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"TrackConf\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareStrings"
+                              },
+                              "parameters": [
+                                "SaveLoadArrayPos[0]",
+                                "!=",
+                                "\"MovementMod\""
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "RegEx::Split"
+                              },
+                              "parameters": [
+                                "",
+                                "\",\"",
+                                "",
+                                "SaveLoadArrayPos[1]",
+                                "\"SaveLoadArrayPosition\"",
+                                ""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "CreateByName"
+                              },
+                              "parameters": [
+                                "",
+                                "Blocks",
+                                "SaveLoadArrayPos[0]",
+                                "ToNumber(SaveLoadArrayPosition[0])",
+                                "ToNumber(SaveLoadArrayPosition[1])",
+                                "\"Thumbnail\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetAngle"
+                              },
+                              "parameters": [
+                                "Blocks",
+                                "=",
+                                "SaveLoadArrayPosition[2]"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetStringVariable"
+                              },
+                              "parameters": [
+                                "DEBUGLOG",
+                                "+",
+                                "\"--\nName: \"+SaveLoadArrayPos[0]+\"; Position: \"+SaveLoadArrayPosition[0]+\", \"+SaveLoadArrayPosition[1]+\", \"+SaveLoadArrayPosition[2]+\"; Variables: id:\"+SaveLoadArrayPos[2]+\", finish:\"+SaveLoadArrayPos[3]+\", jump:\"+SaveLoadArrayPos[4]"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareStrings"
+                                  },
+                                  "parameters": [
+                                    "SaveLoadArrayPos[0]",
+                                    "=",
+                                    "\"ColorBlock\""
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "ModVarObjetTxt"
+                                  },
+                                  "parameters": [
+                                    "Blocks",
+                                    "ID",
+                                    "=",
+                                    "SaveLoadArrayPos[2]"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "ChangeColor"
+                                  },
+                                  "parameters": [
+                                    "ColorBlock",
+                                    "ColorBlock.ID"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "parameters": []
+                },
+                {
+                  "colorB": 228,
+                  "colorG": 176,
+                  "colorR": 74,
+                  "creationTime": 0,
+                  "name": "Load track",
+                  "source": "",
+                  "type": "BuiltinCommonInstructions::Group",
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "CurrentSceneName()",
+                            "!=",
+                            "\"Menu\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "RegEx::Split"
+                          },
+                          "parameters": [
+                            "",
+                            "\",\"",
+                            "",
+                            "SaveLoadArrayPos[1]",
+                            "\"SaveLoadArrayPosition\"",
+                            ""
+                          ]
+                        }
+                      ],
+                      "events": [
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "folded": true,
+                          "name": "Compatibility",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Comment",
+                              "color": {
+                                "b": 109,
+                                "g": 230,
+                                "r": 255,
+                                "textB": 0,
+                                "textG": 0,
+                                "textR": 0
+                              },
+                              "comment": "Checkpoint Pillar has been renamed to LightEmitter"
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareStrings"
+                                  },
+                                  "parameters": [
+                                    "SaveLoadArrayPos[0]",
+                                    "=",
+                                    "\"CheckpointPillar\""
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SetStringVariable"
+                                  },
+                                  "parameters": [
+                                    "SaveLoadArrayPos[0]",
+                                    "=",
+                                    "\"LightEmitter\""
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "parameters": []
+                        },
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "disabled": true,
+                          "folded": true,
+                          "name": "DEBUG",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SetStringVariable"
+                                  },
+                                  "parameters": [
+                                    "DEBUGLOG",
+                                    "+",
+                                    "\"--\nName: \"+SaveLoadArrayPos[0]+\"; Position: \"+SaveLoadArrayPosition[0]+\", \"+SaveLoadArrayPosition[1]+\", \"+SaveLoadArrayPosition[2]+\"; Variables: id:\"+SaveLoadArrayPos[2]+\", finish:\"+SaveLoadArrayPos[3]+\", jump:\"+SaveLoadArrayPos[4]"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "parameters": []
+                        },
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "name": "Create Block and modify universal properties",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "CreateByName"
+                                  },
+                                  "parameters": [
+                                    "",
+                                    "Blocks",
+                                    "SaveLoadArrayPos[0]",
+                                    "ToNumber(SaveLoadArrayPosition[0])",
+                                    "ToNumber(SaveLoadArrayPosition[1])",
+                                    ""
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "SetAngle"
+                                  },
+                                  "parameters": [
+                                    "Blocks",
+                                    "=",
+                                    "SaveLoadArrayPosition[2]"
+                                  ]
+                                }
+                              ],
+                              "events": [
+                                {
+                                  "colorB": 228,
+                                  "colorG": 176,
+                                  "colorR": 74,
+                                  "creationTime": 0,
+                                  "folded": true,
+                                  "name": "Load certain variables to blocks",
+                                  "source": "",
+                                  "type": "BuiltinCommonInstructions::Group",
+                                  "events": [
+                                    {
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [
+                                        {
+                                          "type": {
+                                            "value": "BuiltinCommonInstructions::Or"
+                                          },
+                                          "parameters": [],
+                                          "subInstructions": [
+                                            {
+                                              "type": {
+                                                "value": "BuiltinCommonInstructions::CompareStrings"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[0]",
+                                                "=",
+                                                "\"Node\""
+                                              ]
+                                            },
+                                            {
+                                              "type": {
+                                                "value": "BuiltinCommonInstructions::CompareStrings"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[0]",
+                                                "=",
+                                                "\"Powerup\""
+                                              ]
+                                            },
+                                            {
+                                              "type": {
+                                                "value": "BuiltinCommonInstructions::CompareStrings"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[0]",
+                                                "=",
+                                                "\"CheckpointTrigger\""
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjet"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "ID",
+                                            "=",
+                                            "SaveLoadArrayPos[2]"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "folded": true,
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [
+                                        {
+                                          "type": {
+                                            "value": "BuiltinCommonInstructions::Or"
+                                          },
+                                          "parameters": [],
+                                          "subInstructions": [
+                                            {
+                                              "type": {
+                                                "value": "BuiltinCommonInstructions::CompareStrings"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[0]",
+                                                "=",
+                                                "\"Node\""
+                                              ]
+                                            },
+                                            {
+                                              "type": {
+                                                "value": "BuiltinCommonInstructions::CompareStrings"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[0]",
+                                                "=",
+                                                "\"CheckpointTrigger\""
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "actions": [],
+                                      "events": [
+                                        {
+                                          "type": "BuiltinCommonInstructions::Standard",
+                                          "conditions": [
+                                            {
+                                              "type": {
+                                                "value": "BooleanVariable"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[3]",
+                                                "True",
+                                                "\"true\""
+                                              ]
+                                            }
+                                          ],
+                                          "actions": [
+                                            {
+                                              "type": {
+                                                "value": "SetBooleanObjectVariable"
+                                              },
+                                              "parameters": [
+                                                "Blocks",
+                                                "FINISH",
+                                                "True",
+                                                "SaveLoadArrayPos[3]"
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "BuiltinCommonInstructions::Standard",
+                                          "conditions": [
+                                            {
+                                              "type": {
+                                                "value": "BooleanVariable"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[3]",
+                                                "False",
+                                                "\"true\""
+                                              ]
+                                            }
+                                          ],
+                                          "actions": [
+                                            {
+                                              "type": {
+                                                "value": "SetBooleanObjectVariable"
+                                              },
+                                              "parameters": [
+                                                "Blocks",
+                                                "FINISH",
+                                                "False",
+                                                "SaveLoadArrayPos[3]"
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "BuiltinCommonInstructions::Standard",
+                                          "conditions": [
+                                            {
+                                              "type": {
+                                                "value": "BooleanVariable"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[4]",
+                                                "True",
+                                                "\"true\""
+                                              ]
+                                            }
+                                          ],
+                                          "actions": [
+                                            {
+                                              "type": {
+                                                "value": "SetBooleanObjectVariable"
+                                              },
+                                              "parameters": [
+                                                "Blocks",
+                                                "JUMP",
+                                                "True",
+                                                "SaveLoadArrayPos[3]"
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "BuiltinCommonInstructions::Standard",
+                                          "conditions": [
+                                            {
+                                              "type": {
+                                                "value": "BooleanVariable"
+                                              },
+                                              "parameters": [
+                                                "SaveLoadArrayPos[4]",
+                                                "False",
+                                                "\"true\""
+                                              ]
+                                            }
+                                          ],
+                                          "actions": [
+                                            {
+                                              "type": {
+                                                "value": "SetBooleanObjectVariable"
+                                              },
+                                              "parameters": [
+                                                "Blocks",
+                                                "JUMP",
+                                                "False",
+                                                "SaveLoadArrayPos[3]"
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "BuiltinCommonInstructions::Standard",
+                                          "conditions": [],
+                                          "actions": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [
+                                        {
+                                          "type": {
+                                            "value": "BuiltinCommonInstructions::CompareStrings"
+                                          },
+                                          "parameters": [
+                                            "SaveLoadArrayPos[0]",
+                                            "=",
+                                            "\"MovementMod\""
+                                          ]
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjetTxt"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "Slippery",
+                                            "=",
+                                            "SaveLoadArrayPos[2]"
+                                          ]
+                                        },
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjetTxt"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "CanJump",
+                                            "=",
+                                            "SaveLoadArrayPos[3]"
+                                          ]
+                                        },
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjetTxt"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "Deceleration",
+                                            "=",
+                                            "SaveLoadArrayPos[4]"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [
+                                        {
+                                          "type": {
+                                            "value": "BuiltinCommonInstructions::CompareStrings"
+                                          },
+                                          "parameters": [
+                                            "SaveLoadArrayPos[0]",
+                                            "=",
+                                            "\"Turret\""
+                                          ]
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjetTxt"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "Range",
+                                            "=",
+                                            "SaveLoadArrayPos[2]"
+                                          ]
+                                        },
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjetTxt"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "Speed",
+                                            "=",
+                                            "SaveLoadArrayPos[3]"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [
+                                        {
+                                          "type": {
+                                            "value": "BuiltinCommonInstructions::CompareStrings"
+                                          },
+                                          "parameters": [
+                                            "SaveLoadArrayPos[0]",
+                                            "=",
+                                            "\"ColorBlock\""
+                                          ]
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": {
+                                            "value": "ModVarObjetTxt"
+                                          },
+                                          "parameters": [
+                                            "Blocks",
+                                            "ID",
+                                            "=",
+                                            "SaveLoadArrayPos[2]"
+                                          ]
+                                        },
+                                        {
+                                          "type": {
+                                            "value": "ChangeColor"
+                                          },
+                                          "parameters": [
+                                            "ColorBlock",
+                                            "ColorBlock.ID"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "parameters": []
+                                }
+                              ]
+                            },
+                            {
+                              "colorB": 228,
+                              "colorG": 176,
+                              "colorR": 74,
+                              "creationTime": 0,
+                              "folded": true,
+                              "name": "Load configs to TrackConf",
+                              "source": "",
+                              "type": "BuiltinCommonInstructions::Group",
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "BuiltinCommonInstructions::CompareStrings"
+                                      },
+                                      "parameters": [
+                                        "SaveLoadArrayPos[0]",
+                                        "=",
+                                        "\"TrackConf\""
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "Laps",
+                                        "=",
+                                        "SaveLoadArrayPos[2]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "MaxSpeed",
+                                        "=",
+                                        "SaveLoadArrayPos[3]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "Acceleration",
+                                        "=",
+                                        "SaveLoadArrayPos[4]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "Deacceleration",
+                                        "=",
+                                        "SaveLoadArrayPos[5]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "AirCooldown",
+                                        "=",
+                                        "SaveLoadArrayPos[6]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjetTxt"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "BackgroundColor",
+                                        "=",
+                                        "SaveLoadArrayPos[7]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "Drift",
+                                        "=",
+                                        "SaveLoadArrayPos[8]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "ModVarObjet"
+                                      },
+                                      "parameters": [
+                                        "Blocks",
+                                        "Dim",
+                                        "=",
+                                        "SaveLoadArrayPos[9]"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "SetBooleanObjectVariable"
+                                      },
+                                      "parameters": [
+                                        "TrackConf",
+                                        "RespawnOnBgTouch",
+                                        "False",
+                                        ""
+                                      ]
+                                    }
+                                  ],
+                                  "events": [
+                                    {
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [
+                                        {
+                                          "type": {
+                                            "value": "BooleanVariable"
+                                          },
+                                          "parameters": [
+                                            "SaveLoadArrayPos[9]",
+                                            "True",
+                                            "\"True"
+                                          ]
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": {
+                                            "value": "SetBooleanObjectVariable"
+                                          },
+                                          "parameters": [
+                                            "TrackConf",
+                                            "RespawnOnBgTouch",
+                                            "True",
+                                            ""
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "BuiltinCommonInstructions::Standard",
+                                      "conditions": [],
+                                      "actions": []
+                                    }
+                                  ]
+                                }
+                              ],
+                              "parameters": []
+                            }
+                          ],
+                          "parameters": []
+                        }
+                      ]
+                    }
+                  ],
+                  "parameters": []
+                },
+                {
+                  "colorB": 228,
+                  "colorG": 176,
+                  "colorR": 74,
+                  "creationTime": 0,
+                  "folded": true,
+                  "name": "Turn off camera behaivor for Bot and Player",
+                  "source": "",
+                  "type": "BuiltinCommonInstructions::Group",
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "SaveLoadArrayPos[0]",
+                            "=",
+                            "\"AI\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "ActivateBehavior"
+                          },
+                          "parameters": [
+                            "AI",
+                            "SmoothCamera",
+                            ""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "SaveLoadArrayPos[0]",
+                            "=",
+                            "\"Player\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "ActivateBehavior"
+                          },
+                          "parameters": [
+                            "Player",
+                            "SmoothCamera",
+                            ""
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "parameters": []
+                }
+              ]
+            },
+            {
+              "disabled": true,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"DEBUGLOG:\n\"+DEBUGLOG",
+                    "\"info\"",
+                    ""
+                  ]
+                }
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "folded": true,
+              "name": "DEBUGLOG",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": {
+                "value": "SetBooleanVariable"
+              },
+              "parameters": [
+                "FinishedLoadSave",
+                "True",
+                ""
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
