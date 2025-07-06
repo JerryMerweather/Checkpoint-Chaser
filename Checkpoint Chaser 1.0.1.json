@@ -7,12 +7,12 @@
     "revision": 0
   },
   "properties": {
-    "adaptGameResolutionAtRuntime": false,
+    "adaptGameResolutionAtRuntime": true,
     "antialiasingMode": "none",
     "antialisingEnabledOnMobile": false,
     "folderProject": true,
     "orientation": "landscape",
-    "packageName": "roguecat.topdown.racing.experimental",
+    "packageName": "roguecat.topdown.racing",
     "pixelsRounding": false,
     "projectUuid": "eadf2128-518c-484d-a71b-60a8abb01543",
     "scaleMode": "nearest",
@@ -25,7 +25,7 @@
     "windowWidth": 1280,
     "windowHeight": 736,
     "latestCompilationDirectory": "/home/futoshdirozini/Documents/PROJECTS/COMPLIE",
-    "maxFPS": 0,
+    "maxFPS": 60,
     "minFPS": 60,
     "verticalSync": false,
     "platformSpecificAssets": {
@@ -1952,6 +1952,14 @@
         "preloadAsMusic": false,
         "preloadAsSound": false,
         "preloadInCache": false,
+        "userAdded": false
+      },
+      {
+        "file": "PowerupFast4.png",
+        "kind": "image",
+        "metadata": "{\"localFilePath\":\"PowerupFast4.png\",\"extension\":\".png\"}",
+        "name": "PowerupFast4.png",
+        "smoothed": false,
         "userAdded": false
       }
     ],
@@ -5714,7 +5722,7 @@
               "sprites": [
                 {
                   "hasCustomCollisionMask": true,
-                  "image": "PowerupFast3.png",
+                  "image": "PowerupFast4.png",
                   "points": [],
                   "originPoint": {
                     "name": "origine",
@@ -6566,7 +6574,12 @@
           "booleanParameters": {}
         }
       ],
-      "behaviors": [],
+      "behaviors": [
+        {
+          "name": "InOnScreen",
+          "type": "IsOnScreen::InOnScreen"
+        }
+      ],
       "animations": [
         {
           "name": "",
