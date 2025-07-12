@@ -18,7 +18,7 @@
     "gridColor": 10401023,
     "gridAlpha": 0.8,
     "snap": true,
-    "zoomFactor": 0.5919358029250561,
+    "zoomFactor": 0.5358773932266223,
     "windowMask": false
   },
   "objectsGroups": [
@@ -7472,6 +7472,42 @@
       ]
     },
     {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [
+        {
+          "type": {
+            "value": "BooleanVariable"
+          },
+          "parameters": [
+            "SettingShaking",
+            "False",
+            ""
+          ]
+        },
+        {
+          "type": {
+            "value": "Tween::SceneTweenIsPlaying"
+          },
+          "parameters": [
+            "",
+            "\"Move\""
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": {
+            "value": "Tween::StopSceneTween"
+          },
+          "parameters": [
+            "",
+            "\"Move\"",
+            "yes"
+          ]
+        }
+      ]
+    },
+    {
       "colorB": 228,
       "colorG": 176,
       "colorR": 74,
@@ -8429,6 +8465,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "folded": true,
       "name": "Place and remove",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
@@ -8480,11 +8517,11 @@
                       "subInstructions": [
                         {
                           "type": {
-                            "value": "MouseButtonPressed"
+                            "value": "MouseButtonFromTextPressed"
                           },
                           "parameters": [
                             "",
-                            "Right"
+                            "\"Right\""
                           ]
                         },
                         {
@@ -8494,16 +8531,6 @@
                           "parameters": [
                             "Button",
                             ""
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                          },
-                          "parameters": [
-                            "Button",
-                            "PlatformerObject",
-                            "\"Jump\""
                           ]
                         }
                       ]
@@ -8578,6 +8605,7 @@
           "colorG": 176,
           "colorR": 74,
           "creationTime": 0,
+          "folded": true,
           "name": "Placement",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -8631,17 +8659,44 @@
                 },
                 {
                   "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
+                  "conditions": [],
+                  "actions": [
                     {
                       "type": {
-                        "value": "CollisionNP"
+                        "value": "ResizableCapability::ResizableBehavior::SetSize"
                       },
                       "parameters": [
                         "BuildCollision",
+                        "Resizable",
+                        "SquareOutline.Width()",
+                        "SquareOutline.Height()"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "folded": true,
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "PickNearest"
+                      },
+                      "parameters": [
                         "Blocks",
-                        "",
-                        "",
-                        "yes"
+                        "BuildCollision.CenterX()",
+                        "BuildCollision.CenterY()",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "CollisionPoint"
+                      },
+                      "parameters": [
+                        "BuildCollision",
+                        "Blocks.CenterX()",
+                        "Blocks.CenterY()"
                       ]
                     }
                   ],
@@ -8688,7 +8743,6 @@
                       "comment": "Unpick instance that were picked in parent condition"
                     },
                     {
-                      "folded": true,
                       "type": "BuiltinCommonInstructions::Standard",
                       "conditions": [
                         {
@@ -8969,19 +9023,29 @@
                   "comment": "Create the block, as nothing detected in detector(BuildColllision)"
                 },
                 {
+                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
                       "type": {
+                        "value": "PickNearest"
+                      },
+                      "parameters": [
+                        "Blocks",
+                        "BuildCollision.CenterX()",
+                        "BuildCollision.CenterY()",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
                         "inverted": true,
-                        "value": "CollisionNP"
+                        "value": "CollisionPoint"
                       },
                       "parameters": [
                         "BuildCollision",
-                        "Blocks",
-                        "",
-                        "",
-                        "yes"
+                        "Blocks.CenterX()",
+                        "Blocks.CenterY()"
                       ]
                     },
                     {
@@ -9169,6 +9233,7 @@
                   "colorG": 176,
                   "colorR": 74,
                   "creationTime": 0,
+                  "folded": true,
                   "name": "Modify block angle and its properties",
                   "source": "",
                   "type": "BuiltinCommonInstructions::Group",
@@ -9515,7 +9580,6 @@
                           ]
                         },
                         {
-                          "folded": true,
                           "type": "BuiltinCommonInstructions::Standard",
                           "conditions": [
                             {
@@ -9763,7 +9827,6 @@
                           ]
                         },
                         {
-                          "folded": true,
                           "type": "BuiltinCommonInstructions::Standard",
                           "conditions": [
                             {
@@ -9820,7 +9883,6 @@
                               ]
                             },
                             {
-                              "folded": true,
                               "type": "BuiltinCommonInstructions::Standard",
                               "conditions": [
                                 {
@@ -9934,7 +9996,6 @@
           "events": [
             {
               "disabled": true,
-              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -10668,6 +10729,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "folded": true,
       "name": "Level code popup",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
@@ -11061,11 +11123,19 @@
                 },
                 {
                   "type": {
-                    "value": "KeyReleased"
+                    "value": "BuiltinCommonInstructions::And"
                   },
-                  "parameters": [
-                    "",
-                    "NumpadAdd"
+                  "parameters": [],
+                  "subInstructions": [
+                    {
+                      "type": {
+                        "value": "KeyFromTextReleased"
+                      },
+                      "parameters": [
+                        "",
+                        "\"NumpadAdd\""
+                      ]
+                    }
                   ]
                 }
               ]
@@ -11104,6 +11174,18 @@
                 "=",
                 "ToString(clamp(roundTo(Zoom, 2), 0.1,2.5))"
               ]
+            },
+            {
+              "type": {
+                "value": "PlaySound"
+              },
+              "parameters": [
+                "",
+                "tick zoom",
+                "",
+                "SettingSfxSound",
+                "2*Zoom"
+              ]
             }
           ]
         },
@@ -11118,19 +11200,27 @@
               "subInstructions": [
                 {
                   "type": {
-                    "value": "KeyReleased"
-                  },
-                  "parameters": [
-                    "",
-                    "NumpadSubtract"
-                  ]
-                },
-                {
-                  "type": {
                     "value": "IsMouseWheelScrollingDown"
                   },
                   "parameters": [
                     ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::And"
+                  },
+                  "parameters": [],
+                  "subInstructions": [
+                    {
+                      "type": {
+                        "value": "KeyFromTextReleased"
+                      },
+                      "parameters": [
+                        "",
+                        "\"NumpadSubtract\""
+                      ]
+                    }
                   ]
                 }
               ]
@@ -11168,6 +11258,18 @@
                 "Text",
                 "=",
                 "ToString(clamp(roundTo(Zoom, 2), 0.1,2.5))"
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaySound"
+              },
+              "parameters": [
+                "",
+                "tick zoom",
+                "",
+                "SettingSfxSound",
+                "1*Zoom"
               ]
             }
           ]
@@ -16571,6 +16673,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "disabled": true,
       "folded": true,
       "name": "TabNav",
       "source": "",
@@ -17285,16 +17388,6 @@
                     "Button",
                     ""
                   ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Button",
-                    "PlatformerObject",
-                    "\"Jump\""
-                  ]
                 }
               ]
             },
@@ -17721,11 +17814,13 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
+              "folded": true,
               "name": "Toolbar",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
               "events": [
                 {
+                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -18236,7 +18331,6 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
-              "folded": true,
               "name": "Track config",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -18453,6 +18547,7 @@
                   ]
                 },
                 {
+                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -18940,7 +19035,6 @@
                   ]
                 },
                 {
-                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -19035,7 +19129,7 @@
                             "Help",
                             "Text",
                             "=",
-                            "\"Level editor user guide\n\nControls\n - Move the camera using the W, A, S, D keys.\n - Zoom in and out using the NUMPAD +/- keys or the scroll wheel.\n - Place blocks by right-clicking.\n - Rotate placed blocks by middle-clicking.\n - Remove blocks by activating the eraser (slash icon in the bottom left) and right-clicking on the \tblock. Deactivate the eraser by clicking the icon again (the orange outline will disappear).\n - Change the rotation of future placed blocks by clicking the arrow icon in the bottom left.\n\nSelection\n - Select blocks by left-clicking and dragging. Move the selected blocks using the arrow keys, delete    \tthem by pressing Delete, and rotate them by pressing R\n - Add blocks by left-clicking and holding Shift.\n - Remove blocks by left-clicking and holding Ctrl.\n - Change future placed blocks by clicking (not pressing) < or >.\n\n\nBlocks\n\nNodes\nNodes are reference points for bots to navigate. They follow nodes in sequential order (1, 2, 3, etc.) in straight lines. The ranking system also uses nodes to determine the first place. \n- Place nodes as points to follow. Start from 1 and increase the number for each subsequent node. \n- Add nodes at road turns, placing them in the center.\n- For Muds, add a node before the Mud and check the 'jump' checkbox.\n- To avoid barriers, add nodes beside them so bots will navigate around them. \n- The last node should have the 'finish' checkbox checked so bots will loop back to the first node.\n\n\nCheckpoints\nCheckpoints are used for the ranking system and as spawn points when a player or bot dies.\n- Place checkpoints in a straight line, starting from 1. \n- Keep checkpoints away from Muds to allow karts to accelerate and jump. Place them near a node so a bot can start following the path again if it fails.\n- The last checkpoint should have the 'Finish' checkbox checked, the highest ID, and be placed near the finish line. Laps are counted when karts pass this last checkpoint.\n\nCollisions\nPlace collisions on the sides of the road to prevent players and bots from going off the track, even if they jump.\n\nBarriers\nBarriers are obstacles placed on the road. A car can jump on the barrier to skip it, or steer around it.\n\nPowerup\nA powerup currently can either speed up or slow down. Id of 0 or less will make it random (change after every collision) an ID of 1 will set it to only speed up, and 2 will only slow down.\n\nRamp\nWhen a car runs over it, it will jump automatically.\n\nSlow\nStops bots from accelerating whenever its in collision with it.\n\nColor block\nUse color blocks to decorate your map with colors. Adjust the color using the slider on the left. You can also change the background color of the entire track using the track config.\n\nTrackConfig\nA block used to save track configurations. Its position is fixed at 1000x, 1000y.\n\nTrack Configuration\n- Laps: Number of laps to complete the race.\n- Max Speed: The maximum speed a kart can reach.\n- Jump Cool down b: Time in seconds a kart must wait after a jump before jumping again.\n- Acceleration / Deceleration: The amount to increase or decrease speed per tick.\n- Background Color: The background color of the track.\n- Load Level: Load a level code into the editor. Type 'Builtin:' without quotes, followed by a number to load one of the built-in levels.\n\nKarts spawning\nPlace 2 player cars and 5 bot cars, for the track configs to work\""
+                            "\"Level Editor User Guide\n\nGET THE PDF COPY WITH IMAGES AND BETTER FORMATTING ON ITCH.IO\n\nBest practices\n\n– Use double width roads as a minimum\n– Use ramps for mud, do not force the player to jump unless its a core design of the map.\n– Prefer to make Barriers easy to avoid. This applies to any obstacle. This is a racing game,\nnot a parkour game.\n– Give collision blocks a visual indicator. Collision blocks are invisible. The player should\nknow where will the car collide. Try using color blocks as a border to indicate a wall or\ncollision.\n– The 2 player should be parallel to each other for fairness\nRequirements\nAlways try to fill road width by the node border to make sure everyone passes and touches the node\n(or its boundary)\nFill the entire width of the road\nThe same applies with checkpoints:\nFill the entire width of the road\n——\nWhen the player/bot respawns, they will be assigned the nearest node to the checkpoint the\nrespawned at.\nHover over a checkpoint trigger to highlight its nearest node. Make sure that the node nearest to\ncheckpoint is correctly placed and is in the correct order and direction.\n\n\nTutorial\n\nMake your own track with this simple tutorial.\n1. Start by planning out the road\na. Open the blocks menu by pressing the button “Block list”\nb. Select the block “Road”\nc. Learn more about controls here (Read more)\n2. Add mud and obstacles\na. Add mud to require the player to jump.\ni. Add ramps besides the mud to assist in jumping (Read more)\nb. Barriers are obstacles too, try to make them easy yet still interfere a bit.\n3. Add checkpoint triggers in order starting from 1\na. They should fill the entire road width and not leave a gap. (Read more)\nb. The last checkpoint should have the finish option checked and should have the\nhighest ID (Read more)\n4. Add nodes in order starting from 1\na. These are extremely important for the game systems to work! (Read more)\nb. The last node should have the finish option checked and should have the highest ID\nc. If the node is besides mud that the bot should jump on, check the jump option (Read\nmore)\nd. The node should connect the previous node in a straight line. The bot drives and\nsteers in a straight line to the next node\n5. Add collisions\na. Make sure to cover the border of all roads to prevent the player or bot to go off the\ntrack.\nb. (Optional) Add a visual indicator to the collision (Read more)\n6. Add 2 players and 5 bots\na. 2 players should be parallel to each other\nb. 5 bots behind the players or in the same level (Read more)\n7. Modify the track options to best fit what you are planning for the track!\na. You can know more about the options by clicking the read more link (Read more)\n8. Review your track for mistakes and correct them\n9. Save the track by clicking the save icon (floppy disk button at the bottom left.)a. Copy the code\n10. Exit the level editor and test your level\na. Press “Play Custom Track”\nb. Paste the code\nc. Play your track!\n11. After testing the track, you might find errors\na. Go to the level editor\nb. Press the gear icon located at the bottom left\nc. Press “Load level”\nd. Paste the track code\ne. Press Load now\n12. Modify and correct the mistakes\n13. Repeat step 8-12 until no mistakes found.\n14. Share your track and save it in a text file.\n\n\nControls\n\n- Move the camera using the W, A, S, D keys.\n- Zoom in and out using the NUMPAD +/- keys or the scroll wheel.\n- Place blocks by right-clicking.\n- Rotate already placed blocks by middle-clicking.\n- Remove blocks by activating the eraser (slash icon in the bottom left) and right-clicking on the\nblock. Deactivate the eraser by clicking the icon again (the purple background will\ndisappear).\n- Change the rotation of future placed blocks by clicking the arrow icon in the bottom left.\nSelection\n- Select blocks by left-clicking and dragging. Move the selected blocks using the arrow keys, delete\nthem by pressing Delete, and rotate them by pressing R\n- Add blocks by left-clicking and holding Shift.\n- Remove blocks by left-clicking and holding Ctrl.\n- Change future placed blocks by clicking (not pressing) < or >. Or chose a block from the blocks\nlist accessed using the button above the left and right arrows\n\n\nBlocks\n\nNodes\n\nNodes are reference points for bots to navigate. They follow nodes in sequential order (1, 2, 3, etc.)\nin straight lines. The ranking system also uses nodes to determine the first place.\n– Place nodes as points to follow. Start from 1 and increase the number for each subsequent\nnode.\n– Add nodes at road turns, placing them in the center.\n– For mud, add a node before the mud puddle and check the 'jump' checkbox.\n– To avoid barriers, add nodes beside them so bots will navigate around them.\n– The last node should have the 'finish' checkbox checked so bots will loop back to the first\nnode.\nNOTE: To ensure accurate tracking, place a node approximately every 64 pixels, or about 2 node\nblocks apart, filling the entire road width, so that any player crossing the node is detected and\ncounted.\nEnsure that nodes are placed correctly as they are used by:\n– Position ranking\n– Wrong direction detection\n– Turning Assist\n– Bot driving and drifting\nYou can also implement multiple paths. The bot chooses a\nrandom node that isnt blocked by a barrier or a collision.\nSo dont use multiple nodes of the same number on the same line\nFor multiple tracks or the bot might take weird paths.\n\n\nCheckpoints\nCheckpoints are used for the ranking system and as spawn points when a player or bot dies.\n- Place checkpoints in a straight line, starting from 1.\n- Keep checkpoints away from holes to allow cars to accelerate and jump. Place them near a node\nso a bot can start following the path again if it fails.\n- The last checkpoint should have the 'Finish' checkbox checked, the highest ID of order, and be\nplaced near the finish line. Laps are counted when cars pass this last checkpoint.\nEnsure that Checkpoints are placed correctly as they are used by position ranking system and to\ndetect laps.\n\nCollisions\nPlace collisions on the sides of the road to prevent players and bots from going off the track, even if\nthey jump.\n\nBarriers\nBarriers are obstacles placed on the road. A car can steer around it.\n\nPower up\nA power up currently can either speed up or slow down. Id of 0 or less will make it random (change\nafter every collision) an ID of 1 will set it to only speed up, 2 will only slow down, 3 will set it as a\nbomb.\n\nRamp\nWhen a car runs over it, it will jump automatically, even if the jump cool down didnt finish.\n\nSlow\nStops bots from accelerating and slows it down to a fixed limit whenever its in collision with it.\n\nColor block\nUse color blocks to decorate your map with colors. Adjust the color using the slider on the left. You\ncan also change the background color of the entire track using the track config.\n\nLightEmitterEmits light. You can control the color of the light by placing it over a colorblock, which changes\nthe color of the light to the color of the colorblock beneath.\n\nTurret\nA turret shoots bullets to the nearest car. Range in pixels determine how far should the bullet reach,\nand the speed determines the speed of the bullet, the shooting interval is fixed.\n\n\nMovementMod\nMovementMod changes the car steering speed, deceleration, and jump ability.\nThe configurations for these sliders are the same as for track configuration except the jump option\nwhich either allows jumps or not.\n\nTrackConfig\nA block used to save track configurations. Its position is fixed at 1000x, 1000y.\nCant be removed as it is necessary to preserve track configuration..\n\n\nTrack Configuration\n\n– Laps: Number of laps to complete the race.\n– Max Speed: The maximum speed a car can reach.\n– Jump Cool Down: Time in seconds a car must wait after a jump before jumping again.\n– Acceleration / Deceleration: The amount to increase or decrease speed.\n– Background Color: The background color of the track.\n– Steering speed: Steering responsivness (the lower the slippier)\n– Respawn on background touch: If the player or bot touch the background of the track, they\nwill respawn.\n– Sunlight Strength: Controls the amount of general lightning the track has, lower values\nresults in a dimmer lightning.\n– Load Level: Load a level code into the editor. Type 'Builtin:' without quotes, followed by a\nnumber to load one of the built-in levels, or simply paste any track code\n\n\nCars Spawning\n\nPlace 2 player cars and 5 bot cars. Make sure player cars are placed parallel to each other to\""
                           ]
                         }
                       ]
@@ -20176,16 +20270,6 @@
                     "ButtonFSM",
                     ""
                   ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Button",
-                    "PlatformerObject",
-                    "\"Jump\""
-                  ]
                 }
               ]
             },
@@ -20442,16 +20526,6 @@
                   "parameters": [
                     "Button",
                     ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Button",
-                    "PlatformerObject",
-                    "\"Jump\""
                   ]
                 }
               ]
@@ -20896,7 +20970,6 @@
           "colorR": 74,
           "creationTime": 0,
           "disabled": true,
-          "folded": true,
           "name": "Transition",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -21119,7 +21192,7 @@
       "colorR": 74,
       "creationTime": 0,
       "folded": true,
-      "name": "UNdoAndRedo",
+      "name": "UndoAndRedo",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
       "events": [
@@ -21530,37 +21603,74 @@
               "subInstructions": [
                 {
                   "type": {
-                    "value": "MouseButtonReleased"
+                    "value": "MouseButtonFromTextReleased"
                   },
                   "parameters": [
                     "",
-                    "Middle"
+                    "\"Middle\""
                   ]
                 },
                 {
                   "type": {
-                    "value": "MouseButtonReleased"
+                    "value": "MouseButtonFromTextReleased"
                   },
                   "parameters": [
                     "",
-                    "Right"
+                    "\"Right\""
                   ]
                 },
                 {
                   "type": {
-                    "value": "MouseButtonReleased"
+                    "value": "KeyFromTextReleased"
                   },
                   "parameters": [
                     "",
-                    "Left"
+                    "\"Delete\""
                   ]
                 },
                 {
                   "type": {
-                    "value": "AnyKeyReleased"
+                    "value": "KeyFromTextReleased"
                   },
                   "parameters": [
-                    ""
+                    "",
+                    "\"Up\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "KeyFromTextReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "\"Right\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "KeyFromTextReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "\"Down\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "KeyFromTextReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "\"Left\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "KeyFromTextReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "\"r\""
                   ]
                 }
               ]
@@ -21568,21 +21678,21 @@
             {
               "type": {
                 "inverted": true,
-                "value": "KeyPressed"
+                "value": "KeyFromTextPressed"
               },
               "parameters": [
                 "",
-                "LControl"
+                "\"LControl\""
               ]
             },
             {
               "type": {
                 "inverted": true,
-                "value": "KeyPressed"
+                "value": "KeyFromTextPressed"
               },
               "parameters": [
                 "",
-                "RControl"
+                "\"RControl\""
               ]
             },
             {
@@ -21696,7 +21806,6 @@
       "type": "BuiltinCommonInstructions::Group",
       "events": [
         {
-          "disabled": true,
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [
             {
@@ -21927,42 +22036,6 @@
         }
       ],
       "parameters": []
-    },
-    {
-      "type": "BuiltinCommonInstructions::Standard",
-      "conditions": [
-        {
-          "type": {
-            "value": "BooleanVariable"
-          },
-          "parameters": [
-            "SettingShaking",
-            "False",
-            ""
-          ]
-        },
-        {
-          "type": {
-            "value": "Tween::SceneTweenIsPlaying"
-          },
-          "parameters": [
-            "",
-            "\"Move\""
-          ]
-        }
-      ],
-      "actions": [
-        {
-          "type": {
-            "value": "Tween::StopSceneTween"
-          },
-          "parameters": [
-            "",
-            "\"Move\"",
-            "yes"
-          ]
-        }
-      ]
     }
   ],
   "layers": [

@@ -18,7 +18,7 @@
     "gridColor": 10401023,
     "gridAlpha": 0.8,
     "snap": true,
-    "zoomFactor": 0.5449810500781566,
+    "zoomFactor": 0.6432750234617025,
     "windowMask": false
   },
   "objectsGroups": [],
@@ -1312,7 +1312,7 @@
           "folded": true,
           "name": "Def",
           "type": "number",
-          "value": 5
+          "value": 3
         },
         {
           "folded": true,
@@ -7925,16 +7925,6 @@
                     "Button",
                     ""
                   ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Button",
-                    "PlatformerObject",
-                    "\"Jump\""
-                  ]
                 }
               ]
             },
@@ -9914,16 +9904,6 @@
                     "ButtonFSM",
                     ""
                   ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Checkbox",
-                    "PlatformerObject",
-                    "\"Jump\""
-                  ]
                 }
               ]
             }
@@ -10100,16 +10080,6 @@
                     "ButtonFSM",
                     ""
                   ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Checkbox",
-                    "PlatformerObject",
-                    "\"Jump\""
-                  ]
                 }
               ]
             }
@@ -10144,16 +10114,6 @@
                     "Checkbox",
                     "ButtonFSM",
                     ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Checkbox",
-                    "PlatformerObject",
-                    "\"Jump\""
                   ]
                 }
               ]
@@ -12439,16 +12399,6 @@
                     "Button",
                     ""
                   ]
-                },
-                {
-                  "type": {
-                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                  },
-                  "parameters": [
-                    "Button",
-                    "PlatformerObject",
-                    "\"Jump\""
-                  ]
                 }
               ]
             },
@@ -12534,7 +12484,6 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
-      "folded": true,
       "name": "Track Selection",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
@@ -12581,16 +12530,6 @@
                                   "parameters": [
                                     "Button",
                                     ""
-                                  ]
-                                },
-                                {
-                                  "type": {
-                                    "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "PlatformerObject",
-                                    "\"Jump\""
                                   ]
                                 }
                               ]
@@ -13485,6 +13424,7 @@
                       "colorG": 176,
                       "colorR": 74,
                       "creationTime": 0,
+                      "folded": true,
                       "name": "Add check to finished tracks and change best times",
                       "source": "",
                       "type": "BuiltinCommonInstructions::Group",
@@ -14313,144 +14253,6 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
-              "folded": true,
-              "name": "Check if level is done",
-              "source": "",
-              "type": "BuiltinCommonInstructions::Group",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Comment",
-                  "color": {
-                    "b": 109,
-                    "g": 230,
-                    "r": 255,
-                    "textB": 0,
-                    "textG": 0,
-                    "textR": 0
-                  },
-                  "comment": "Rewriting this was easy. I hate results."
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "DepartScene"
-                      },
-                      "parameters": [
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [],
-                  "events": [
-                    {
-                      "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [],
-                      "actions": [
-                        {
-                          "type": {
-                            "value": "ReadStringFromStorage"
-                          },
-                          "parameters": [
-                            "GetPropertiesData::ReturnGameTitle() + \"/Results\"",
-                            "\"TrackResults\"",
-                            "",
-                            "ResultsLoadText"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "JSONToVariableStructure2"
-                          },
-                          "parameters": [
-                            "ResultsLoadText",
-                            "ArrayResultLoad"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "SetNumberVariable"
-                          },
-                          "parameters": [
-                            "ResultsCounter",
-                            "=",
-                            "-1"
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "BuiltinCommonInstructions::Repeat",
-                      "repeatExpression": "VariableChildCount(ArrayResultLoad)",
-                      "conditions": [],
-                      "actions": [
-                        {
-                          "type": {
-                            "value": "SetNumberVariable"
-                          },
-                          "parameters": [
-                            "ResultsCounter",
-                            "+",
-                            "1"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "JSONToVariableStructure2"
-                          },
-                          "parameters": [
-                            "ToJSON(ArrayResultLoad[ResultsCounter])",
-                            "TrackInfo"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "PushVariable"
-                          },
-                          "parameters": [
-                            "TracksDone",
-                            "TrackInfo[\"TrackName\"]"
-                          ]
-                        }
-                      ]
-                    }
-                  ],
-                  "variables": [
-                    {
-                      "folded": true,
-                      "name": "TrackInfo",
-                      "type": "structure",
-                      "children": []
-                    },
-                    {
-                      "folded": true,
-                      "name": "ArrayResultLoad",
-                      "type": "string",
-                      "value": "0"
-                    },
-                    {
-                      "folded": true,
-                      "name": "ResultLoad",
-                      "type": "string",
-                      "value": "0"
-                    },
-                    {
-                      "folded": true,
-                      "name": "ResultsLoadText",
-                      "type": "string",
-                      "value": "0"
-                    }
-                  ]
-                }
-              ],
-              "parameters": []
-            },
-            {
-              "colorB": 228,
-              "colorG": 176,
-              "colorR": 74,
-              "creationTime": 0,
               "name": "Progression System",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -14476,7 +14278,6 @@
                       "colorG": 176,
                       "colorR": 74,
                       "creationTime": 0,
-                      "folded": true,
                       "name": "Allowed tracks",
                       "source": "",
                       "type": "BuiltinCommonInstructions::Group",
@@ -14586,7 +14387,6 @@
                       "colorG": 176,
                       "colorR": 74,
                       "creationTime": 0,
-                      "folded": true,
                       "name": "Deactivate select button and other stuff if track not allowed",
                       "source": "",
                       "type": "BuiltinCommonInstructions::Group",
@@ -14608,17 +14408,15 @@
                           "actions": [],
                           "events": [
                             {
-                              "folded": true,
                               "type": "BuiltinCommonInstructions::Standard",
                               "conditions": [
                                 {
                                   "type": {
-                                    "inverted": true,
                                     "value": "NumberVariable"
                                   },
                                   "parameters": [
                                     "AllowedTrackID",
-                                    "<=",
+                                    ">",
                                     "TrackCounter"
                                   ]
                                 },
@@ -14629,7 +14427,7 @@
                                   "parameters": [
                                     "Button",
                                     "ID",
-                                    "=",
+                                    "contains",
                                     "\"Select Track\""
                                   ]
                                 },
@@ -14641,16 +14439,6 @@
                                 }
                               ],
                               "actions": [
-                                {
-                                  "type": {
-                                    "value": "PanelSpriteButton::PanelSpriteButton::Activate"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "yes",
-                                    "="
-                                  ]
-                                },
                                 {
                                   "type": {
                                     "value": "Tween::StopTween"
@@ -14759,7 +14547,7 @@
                                   "parameters": [
                                     "Button",
                                     "ID",
-                                    "=",
+                                    "contains",
                                     "\"Select Track\""
                                   ]
                                 },
@@ -14771,16 +14559,6 @@
                                 }
                               ],
                               "actions": [
-                                {
-                                  "type": {
-                                    "value": "PanelSpriteButton::PanelSpriteButton::Activate"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "Opacity",
-                                    "="
-                                  ]
-                                },
                                 {
                                   "type": {
                                     "value": "Tween::StopTween"
@@ -14986,7 +14764,6 @@
                       "colorG": 176,
                       "colorR": 74,
                       "creationTime": 0,
-                      "folded": true,
                       "name": "Back Buttons scaling",
                       "source": "",
                       "type": "BuiltinCommonInstructions::Group",
@@ -15019,35 +14796,64 @@
                                     "<=",
                                     "TrackCounter"
                                   ]
-                                },
-                                {
-                                  "type": {
-                                    "value": "StringObjectVariable"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "ID",
-                                    "=",
-                                    "\"Back\""
-                                  ]
-                                },
-                                {
-                                  "type": {
-                                    "value": "PickNearest"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "1344",
-                                    "640",
-                                    "\"Back\""
-                                  ]
                                 }
                               ],
                               "actions": [],
                               "events": [
                                 {
                                   "type": "BuiltinCommonInstructions::Standard",
-                                  "conditions": [],
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "StringObjectVariable"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "ID",
+                                        "contains",
+                                        "\"Select Track\""
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "PanelSpriteButton::PanelSpriteButton::Activate"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "no",
+                                        ""
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "StringObjectVariable"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "ID",
+                                        "endsWith",
+                                        "\"Back\""
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "PickNearest"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "1344",
+                                        "640",
+                                        "\"Back\""
+                                      ]
+                                    }
+                                  ],
                                   "actions": [
                                     {
                                       "type": {
@@ -15083,35 +14889,12 @@
                               "conditions": [
                                 {
                                   "type": {
-                                    "inverted": true,
                                     "value": "NumberVariable"
                                   },
                                   "parameters": [
                                     "AllowedTrackID",
-                                    "<=",
+                                    ">",
                                     "TrackCounter"
-                                  ]
-                                },
-                                {
-                                  "type": {
-                                    "value": "StringObjectVariable"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "ID",
-                                    "=",
-                                    "\"Back\""
-                                  ]
-                                },
-                                {
-                                  "type": {
-                                    "value": "PickNearest"
-                                  },
-                                  "parameters": [
-                                    "Button",
-                                    "1344",
-                                    "640",
-                                    "\"Back\""
                                   ]
                                 }
                               ],
@@ -15119,7 +14902,30 @@
                               "events": [
                                 {
                                   "type": "BuiltinCommonInstructions::Standard",
-                                  "conditions": [],
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "StringObjectVariable"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "ID",
+                                        "endsWith",
+                                        "\"Back\""
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "PickNearest"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "1344",
+                                        "640",
+                                        "\"Back\""
+                                      ]
+                                    }
+                                  ],
                                   "actions": [
                                     {
                                       "type": {
@@ -15147,18 +14953,179 @@
                                       ]
                                     }
                                   ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "StringObjectVariable"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "ID",
+                                        "contains",
+                                        "\"Select Track\""
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "PanelSpriteButton::PanelSpriteButton::Activate"
+                                      },
+                                      "parameters": [
+                                        "Button",
+                                        "yes",
+                                        ""
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
-                            },
-                            {
-                              "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [],
-                              "actions": []
                             }
                           ]
                         }
                       ],
                       "parameters": []
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            },
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "folded": true,
+              "name": "Check if level is done",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Comment",
+                  "color": {
+                    "b": 109,
+                    "g": 230,
+                    "r": 255,
+                    "textB": 0,
+                    "textG": 0,
+                    "textR": 0
+                  },
+                  "comment": "Rewriting this was easy. I hate results."
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "DepartScene"
+                      },
+                      "parameters": [
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "ReadStringFromStorage"
+                          },
+                          "parameters": [
+                            "GetPropertiesData::ReturnGameTitle() + \"/Results\"",
+                            "\"TrackResults\"",
+                            "",
+                            "ResultsLoadText"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "JSONToVariableStructure2"
+                          },
+                          "parameters": [
+                            "ResultsLoadText",
+                            "ArrayResultLoad"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "SetNumberVariable"
+                          },
+                          "parameters": [
+                            "ResultsCounter",
+                            "=",
+                            "-1"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Repeat",
+                      "repeatExpression": "VariableChildCount(ArrayResultLoad)",
+                      "conditions": [],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "SetNumberVariable"
+                          },
+                          "parameters": [
+                            "ResultsCounter",
+                            "+",
+                            "1"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "JSONToVariableStructure2"
+                          },
+                          "parameters": [
+                            "ToJSON(ArrayResultLoad[ResultsCounter])",
+                            "TrackInfo"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "PushVariable"
+                          },
+                          "parameters": [
+                            "TracksDone",
+                            "TrackInfo[\"TrackName\"]"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "variables": [
+                    {
+                      "folded": true,
+                      "name": "TrackInfo",
+                      "type": "structure",
+                      "children": []
+                    },
+                    {
+                      "folded": true,
+                      "name": "ArrayResultLoad",
+                      "type": "string",
+                      "value": "0"
+                    },
+                    {
+                      "folded": true,
+                      "name": "ResultLoad",
+                      "type": "string",
+                      "value": "0"
+                    },
+                    {
+                      "folded": true,
+                      "name": "ResultsLoadText",
+                      "type": "string",
+                      "value": "0"
                     }
                   ]
                 }
@@ -15437,6 +15404,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "folded": true,
       "name": "Debug toggle",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
@@ -15785,6 +15753,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "disabled": true,
       "folded": true,
       "name": "TabNav",
       "source": "",

@@ -685,6 +685,7 @@
       ]
     },
     {
+      "folded": true,
       "type": "BuiltinCommonInstructions::Standard",
       "conditions": [
         {
@@ -1793,6 +1794,7 @@
           "actions": [],
           "events": [
             {
+              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -1808,16 +1810,6 @@
                       "parameters": [
                         "Button",
                         ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "PlatformBehavior::PlatformerObjectBehavior::IsUsingControl"
-                      },
-                      "parameters": [
-                        "Button",
-                        "PlatformerObject",
-                        "\"Jump\""
                       ]
                     }
                   ]

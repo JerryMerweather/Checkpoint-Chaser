@@ -240,6 +240,11 @@
       "name": "ShowSpeedometer",
       "type": "boolean",
       "value": false
+    },
+    {
+      "name": "MinimumFPSAutoGraphics",
+      "type": "number",
+      "value": 40
     }
   ],
   "instances": [
@@ -1085,7 +1090,21 @@
           "value": 0
         }
       ],
-      "effects": [],
+      "effects": [
+        {
+          "effectType": "KawaseBlur",
+          "name": "Effect",
+          "doubleParameters": {
+            "blur": 5,
+            "padding": 0,
+            "pixelizeX": 1,
+            "pixelizeY": 1,
+            "quality": 2
+          },
+          "stringParameters": {},
+          "booleanParameters": {}
+        }
+      ],
       "behaviors": [
         {
           "name": "FlashColor",
@@ -3645,6 +3664,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "folded": true,
       "name": "Events running on race start. Camera, debug keys, music controls",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
@@ -3678,6 +3698,7 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
+              "folded": true,
               "name": "Debug keys",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -7106,6 +7127,7 @@
               "comment": "Level Load"
             },
             {
+              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [],
               "actions": [
@@ -8942,6 +8964,7 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
+              "folded": true,
               "name": "Lights",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -9058,6 +9081,83 @@
                       "parameters": [
                         "FakeLight",
                         "\"245;166;35\""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": []
+            },
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "name": "Optimize object behaviors.",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "Node",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ActivateBehavior"
+                      },
+                      "parameters": [
+                        "Node",
+                        "ButtonFSM",
+                        "no"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "Blocks",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ActivateBehavior"
+                      },
+                      "parameters": [
+                        "Blocks",
+                        "Tween",
+                        "no"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ActivateBehavior"
+                      },
+                      "parameters": [
+                        "AI",
+                        "Tween",
+                        "yes"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ActivateBehavior"
+                      },
+                      "parameters": [
+                        "Player",
+                        "Tween",
+                        "yes"
                       ]
                     }
                   ]
@@ -9489,6 +9589,7 @@
           "parameters": []
         },
         {
+          "folded": true,
           "type": "BuiltinCommonInstructions::ForEach",
           "object": "AI",
           "conditions": [
@@ -9866,7 +9967,6 @@
                   "colorG": 176,
                   "colorR": 74,
                   "creationTime": 0,
-                  "folded": true,
                   "name": "Acceleration & Deceleration",
                   "source": "",
                   "type": "BuiltinCommonInstructions::Group",
@@ -10080,15 +10180,20 @@
                                 },
                                 {
                                   "type": {
-                                    "inverted": true,
-                                    "value": "CollisionNP"
+                                    "value": "BuiltinCommonInstructions::Not"
                                   },
-                                  "parameters": [
-                                    "AI",
-                                    "Slow",
-                                    "32",
-                                    "",
-                                    ""
+                                  "parameters": [],
+                                  "subInstructions": [
+                                    {
+                                      "type": {
+                                        "value": "CollisionPoint"
+                                      },
+                                      "parameters": [
+                                        "Slow",
+                                        "AI.CenterX()",
+                                        "AI.CenterY()"
+                                      ]
+                                    }
                                   ]
                                 }
                               ]
@@ -10172,14 +10277,12 @@
                             },
                             {
                               "type": {
-                                "value": "CollisionNP"
+                                "value": "CollisionPoint"
                               },
                               "parameters": [
-                                "AI",
                                 "Slow",
-                                "32",
-                                "",
-                                ""
+                                "AI.CenterX()",
+                                "AI.CenterY()"
                               ]
                             }
                           ]
@@ -10346,7 +10449,6 @@
                   "colorG": 176,
                   "colorR": 74,
                   "creationTime": 0,
-                  "folded": true,
                   "name": "Making sure ai doesnt cross the limits / cheating when allowed",
                   "source": "",
                   "type": "BuiltinCommonInstructions::Group",
@@ -10396,6 +10498,7 @@
                       "colorR": 74,
                       "creationTime": 0,
                       "disabled": true,
+                      "folded": true,
                       "name": "DEBUG",
                       "source": "",
                       "type": "BuiltinCommonInstructions::Group",
@@ -12542,6 +12645,7 @@
               ]
             },
             {
+              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -13674,7 +13778,6 @@
               ]
             },
             {
-              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -14388,7 +14491,6 @@
                   ]
                 },
                 {
-                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -14463,7 +14565,6 @@
                   ]
                 },
                 {
-                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -14999,10 +15100,75 @@
                   "events": [
                     {
                       "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "VarObjet"
+                          },
+                          "parameters": [
+                            "Node",
+                            "ID",
+                            "=",
+                            "Player.Current_NodeID"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::Not"
+                          },
+                          "parameters": [],
+                          "subInstructions": [
+                            {
+                              "type": {
+                                "value": "RaycastToPosition"
+                              },
+                              "parameters": [
+                                "Collision",
+                                "Player.CenterX()",
+                                "Player.CenterY()",
+                                "Node.CenterX()",
+                                "Node.CenterY()",
+                                "PLAYERX",
+                                "PLAYERY",
+                                ""
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "IsTurnedTowardObject"
+                          },
+                          "parameters": [
+                            "Player",
+                            "Node",
+                            "90",
+                            ""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "RotateTowardPosition"
+                          },
+                          "parameters": [
+                            "Player",
+                            "Node.CenterX()",
+                            "Node.CenterY()",
+                            "TurnSpeed/8",
+                            ""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
                       "conditions": [],
                       "actions": [],
                       "events": [
                         {
+                          "disabled": true,
                           "type": "BuiltinCommonInstructions::ForEach",
                           "object": "Node",
                           "conditions": [
@@ -15070,11 +15236,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": []
                 }
               ],
               "parameters": []
@@ -16900,7 +17061,6 @@
       "type": "BuiltinCommonInstructions::Group",
       "events": [
         {
-          "folded": true,
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [
             {
@@ -16931,6 +17091,17 @@
             {
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
+                {
+                  "type": {
+                    "value": "SceneInstancesCount"
+                  },
+                  "parameters": [
+                    "",
+                    "AI",
+                    ">",
+                    "0"
+                  ]
+                },
                 {
                   "type": {
                     "value": "BooleanObjectVariable"
@@ -17342,7 +17513,6 @@
               ]
             },
             {
-              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -17353,6 +17523,17 @@
                     "Pause2",
                     "False",
                     ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SceneInstancesCount"
+                  },
+                  "parameters": [
+                    "",
+                    "AI",
+                    ">",
+                    "0"
                   ]
                 },
                 {
@@ -17401,82 +17582,6 @@
               ]
             },
             {
-              "disabled": true,
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "BooleanVariable"
-                  },
-                  "parameters": [
-                    "QA_enabled",
-                    "False",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "SeparateFromObjects"
-                  },
-                  "parameters": [
-                    "AI",
-                    "AI",
-                    ""
-                  ]
-                }
-              ]
-            },
-            {
-              "disabled": true,
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "BooleanVariable"
-                  },
-                  "parameters": [
-                    "QA_enabled",
-                    "False",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ObjectVariableAsBoolean"
-                  },
-                  "parameters": [
-                    "Player",
-                    "Above",
-                    "False"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ObjectVariableAsBoolean"
-                  },
-                  "parameters": [
-                    "AI",
-                    "Above",
-                    "False"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "SeparateFromObjects"
-                  },
-                  "parameters": [
-                    "AI",
-                    "Player",
-                    ""
-                  ]
-                }
-              ]
-            },
-            {
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -17500,6 +17605,82 @@
                   "parameters": [
                     "Karts",
                     "Barrier",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "disabled": true,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BooleanVariable"
+                  },
+                  "parameters": [
+                    "QA_enabled",
+                    "False",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SeparateFromObjects"
+                  },
+                  "parameters": [
+                    "AI",
+                    "AI",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "disabled": true,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BooleanVariable"
+                  },
+                  "parameters": [
+                    "QA_enabled",
+                    "False",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ObjectVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "Player",
+                    "Above",
+                    "False"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ObjectVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "AI",
+                    "Above",
+                    "False"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SeparateFromObjects"
+                  },
+                  "parameters": [
+                    "AI",
+                    "Player",
                     ""
                   ]
                 }
@@ -18076,7 +18257,6 @@
           ]
         },
         {
-          "folded": true,
           "type": "BuiltinCommonInstructions::ForEach",
           "object": "Player",
           "conditions": [
@@ -19271,7 +19451,7 @@
                     "MusicArtist",
                     "Text",
                     "+",
-                    "\"Level 3\""
+                    "\"Retro Game Music Level 3\""
                   ]
                 }
               ]
@@ -20650,6 +20830,7 @@
       "colorG": 176,
       "colorR": 74,
       "creationTime": 0,
+      "folded": true,
       "name": "Powerup",
       "source": "",
       "type": "BuiltinCommonInstructions::Group",
@@ -20667,6 +20848,7 @@
           "comment": "Change animation fps based on secondstobomb"
         },
         {
+          "folded": true,
           "type": "BuiltinCommonInstructions::ForEach",
           "object": "Bomb",
           "conditions": [],
@@ -20711,6 +20893,34 @@
               ],
               "actions": [],
               "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "SettingElementEffects",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "EffectCapability::EffectBehavior::EnableEffect"
+                      },
+                      "parameters": [
+                        "Bomb",
+                        "Effect",
+                        "\"Effect\"",
+                        "yes"
+                      ]
+                    }
+                  ]
+                },
                 {
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [],
@@ -20879,6 +21089,17 @@
                     "Bomb",
                     "Powerup"
                   ]
+                },
+                {
+                  "type": {
+                    "value": "EffectCapability::EffectBehavior::EnableEffect"
+                  },
+                  "parameters": [
+                    "Bomb",
+                    "Effect",
+                    "\"Effect\"",
+                    "no"
+                  ]
                 }
               ]
             },
@@ -20979,6 +21200,17 @@
                 }
               ],
               "actions": [
+                {
+                  "type": {
+                    "value": "EffectCapability::EffectBehavior::EnableEffect"
+                  },
+                  "parameters": [
+                    "Bomb",
+                    "Effect",
+                    "\"Effect\"",
+                    "no"
+                  ]
+                },
                 {
                   "type": {
                     "value": "ChangeSprite"
@@ -21502,6 +21734,16 @@
             },
             {
               "type": {
+                "value": "BuiltinCommonInstructions::CompareNumbers"
+              },
+              "parameters": [
+                "FPS::FPS()",
+                ">",
+                "MinimumFPSAutoGraphics"
+              ]
+            },
+            {
+              "type": {
                 "value": "AjoutObjConcern"
               },
               "parameters": [
@@ -21538,6 +21780,7 @@
           ]
         },
         {
+          "folded": true,
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [
             {
@@ -21590,6 +21833,92 @@
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [],
               "actions": []
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "GlobalVariableAsBoolean"
+              },
+              "parameters": [
+                "SettingDemandingEffects",
+                "True"
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareNumbers"
+              },
+              "parameters": [
+                "FPS::FPS()",
+                ">",
+                "MinimumFPSAutoGraphics"
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "EnableLayerEffect"
+              },
+              "parameters": [
+                "",
+                "",
+                "\"Shadow\"",
+                "yes"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "GlobalVariableAsBoolean"
+              },
+              "parameters": [
+                "SettingDemandingEffects",
+                "True"
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareNumbers"
+              },
+              "parameters": [
+                "FPS::FPS()",
+                "<",
+                "MinimumFPSAutoGraphics"
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "EnableLayerEffect"
+              },
+              "parameters": [
+                "",
+                "",
+                "\"Shadow\"",
+                "no"
+              ]
             }
           ]
         }
@@ -21686,6 +22015,7 @@
           "actions": [],
           "events": [
             {
+              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -21699,22 +22029,22 @@
                 },
                 {
                   "type": {
-                    "value": "RepeatEveryXSeconds::Repeat"
-                  },
-                  "parameters": [
-                    "",
-                    "\"Blur\"",
-                    "0.04",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
                     "value": "SceneVariableAsBoolean"
                   },
                   "parameters": [
                     "Pause2",
                     "False"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "RepeatEveryXSeconds::Repeat"
+                  },
+                  "parameters": [
+                    "",
+                    "\"Blur\"",
+                    "(1/FPS::FPS())*2",
+                    ""
                   ]
                 }
               ],
@@ -22045,6 +22375,12 @@
                 "RACE_STARTED",
                 "False"
               ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
             }
           ],
           "actions": [
@@ -22916,31 +23252,156 @@
       "type": "BuiltinCommonInstructions::Group",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::ForEach",
-          "object": "Karts",
+          "folded": true,
+          "type": "BuiltinCommonInstructions::Standard",
           "conditions": [
             {
               "type": {
                 "value": "NumberObjectVariable"
               },
               "parameters": [
-                "FakeLight",
-                "ID",
-                "=",
-                "Karts.ID"
+                "TrackConf",
+                "Dim",
+                "<",
+                "1"
               ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "Karts",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberObjectVariable"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "ID",
+                    "=",
+                    "Karts.ID"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreAutour"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "Karts",
+                    "64",
+                    "Karts.Angle()"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "IsOnScreen::InOnScreen::IsOnScreen"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "InOnScreen",
+                    "0",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "EffectCapability::EffectBehavior::EnableEffect"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "Effect",
+                    "\"Effect\"",
+                    "yes"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "IsOnScreen::InOnScreen::IsOnScreen"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "InOnScreen",
+                    "0",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "EffectCapability::EffectBehavior::EnableEffect"
+                  },
+                  "parameters": [
+                    "FakeLight",
+                    "Effect",
+                    "\"Effect\"",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "NumberObjectVariable"
+              },
+              "parameters": [
+                "TrackConf",
+                "Dim",
+                "=",
+                "1"
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
             }
           ],
           "actions": [
             {
               "type": {
-                "value": "MettreAutour"
+                "value": "EffectCapability::EffectBehavior::EnableEffect"
               },
               "parameters": [
                 "FakeLight",
-                "Karts",
-                "64",
-                "Karts.Angle()"
+                "Effect",
+                "\"Effect\"",
+                "no"
+              ]
+            },
+            {
+              "type": {
+                "value": "OpacityCapability::OpacityBehavior::SetValue"
+              },
+              "parameters": [
+                "FakeLight",
+                "Opacity",
+                "=",
+                "100"
               ]
             }
           ]
@@ -23866,10 +24327,6 @@
     {
       "name": "Opacity",
       "type": "OpacityCapability::OpacityBehavior"
-    },
-    {
-      "name": "PlatformerObject",
-      "type": "PlatformBehavior::PlatformerObjectBehavior"
     },
     {
       "name": "Resizable",
